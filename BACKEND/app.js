@@ -7,6 +7,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Route de test
+app.get("/", (req, res) => {
+  res.json({ message: "Backend is running ✓", status: "ok" });
+});
+
+app.get("/api/health", (req, res) => {
+  res.json({ 
+    status: "ok", 
+    notionConfigured: !!(process.env.NOTION_API_KEY && process.env.NOTION_DATABASE_ID)
+  });
+});
+
 app.post("/api/tasks", async (req, res) => {
   try {
     const { title } = req.body;
