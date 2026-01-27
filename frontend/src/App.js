@@ -1,10 +1,28 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import './App.css';
 
 function App() {
   const [task, setTask] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(''); 
+  const [Time,setTime] = useState({}) ; 
+  async function fetchtime() { 
+    const time=await fetch(`https://api.aladhan.com/v1/timingsByCity
+?city=Sfax
+&country=Tunisia
+&method=3
+&school=0
+&latitudeAdjustmentMethod=3
+&timezonestring=Africa/Tunis
+&tune=2,1,0,0,1,0,0,5
+
+`) ; 
+    const data=await time.json() ;
+    setTime(data.data.timings) ;
+    
+  } 
+  useEffect(() => { },[]);
+   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,8 +59,18 @@ function App() {
     }
   };
 
-  return (
-    <div className="App">
+  return ( 
+    <div className="App"> 
+    <div className="time-display">
+        <h2>Prayer Times for Sfax, Tunisia</h2>
+        <ul>
+          <li>Fajr: {Time.Fajr}</li>
+          <li>Dhuhr: {Time.Dhuhr}</li>
+          <li>Asr: {Time.Asr}</li>
+          <li>Maghrib: {Time.Maghrib}</li>
+          <li>Isha: {Time.Isha}</li>
+        </ul>
+      </div>
       <div className="container">
         <h1>📝 My Task Manager</h1>
         <p className="subtitle">Add tasks directly to Notion</p>
