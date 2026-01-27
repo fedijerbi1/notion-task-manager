@@ -21,7 +21,9 @@ function App() {
     setTime(data.data.timings) ;
     
   } 
-  useEffect(() => { },[]);
+  useEffect(() => { 
+    fetchtime() ;
+   },[]);
    
 
   const handleSubmit = async (e) => {
@@ -72,7 +74,7 @@ function App() {
         </ul>
       </div>
       <div className="container">
-        <h1>📝 My Task Manager</h1>
+        <h1><img src="./image/Notion-logo.svg.png" alt="Notion Logo" width="40" height="40" /> My Task Manager</h1>
         <p className="subtitle">Add tasks directly to Notion</p>
         
         <form onSubmit={handleSubmit}>
