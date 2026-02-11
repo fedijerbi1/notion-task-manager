@@ -21,7 +21,7 @@ app.get("/api/health", (req, res) => {
 
 app.post("/api/tasks", async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, description } = req.body;
 
     if (!title) {
       return res.status(400).json({ error: "Title is required" });
@@ -35,6 +35,21 @@ app.post("/api/tasks", async (req, res) => {
         },
       },
     });
+
+    if (description && description.trim()) {
+      await notion.blocks.children.append({
+        block_id: page.id,
+        children: [
+          {
+            object: "block",
+            type: "paragraph",
+            paragraph: {
+              rich_text: [{ text: { content: description.trim() } }],
+            },
+          },
+        ],
+      });
+    }
 
     res.status(201).json({ id: page.id });
   } catch (err) {

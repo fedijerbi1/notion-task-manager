@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   const [task, setTask] = useState('');
+  const [description, setDescription] = useState(''); 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(''); 
   const [Time,setTime] = useState({}) ; 
@@ -44,12 +45,13 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title: task }),
+        body: JSON.stringify({ title: task, description: description }),
       });
 
       if (response.ok) {
-        setMessage('✓ Task added to Notion!');
+        setMessage('✓ Task added to Notion!'); 
         setTask('');
+        setDescription('');
       } else {
         setMessage('✗ Failed to add task');
       }
@@ -76,7 +78,7 @@ function App() {
       <div className="container">
         <h1><img src="./image/Notion-logo.svg.png" alt="Notion Logo" width="40" height="40" /> My Task Manager</h1>
         <p className="subtitle">Add tasks directly to Notion</p>
-        
+
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -85,7 +87,15 @@ function App() {
             placeholder="Enter your task..."
             disabled={loading}
             className="task-input"
-          />
+          /> 
+          <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Enter task description..."
+          disabled={loading}
+          className="description-input"
+        />
           <button type="submit" disabled={loading} className="submit-btn">
             {loading ? 'Adding...' : 'Add Task'}
           </button>
