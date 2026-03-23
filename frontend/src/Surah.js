@@ -15,11 +15,11 @@ function Surah () {
     useEffect(() => {
         const fetchSurah = async ()=> { 
         
-       const response = await fetch(`http://api.alquran.cloud/v1/surah/${number}`)
+       const response = await fetch(`https://api.alquran.cloud/v1/surah/${number}`)
        const data = await response.json() ; 
        setSurah(data.data) ; 
         
-       const audio = await fetch (`http://api.alquran.cloud/v1/surah/${number}/ar.alafasy`) ;
+       const audio = await fetch (`https://api.alquran.cloud/v1/surah/${number}/ar.alafasy`) ;
        const dat = await audio.json(); 
        setSurahAudio (dat.data.ayahs) ;  
       console.log(dat.data.ayahs) ;
