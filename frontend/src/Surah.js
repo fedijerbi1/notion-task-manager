@@ -23,10 +23,9 @@ function Surah () {
       console.log(dat.data.ayahs) ;
         
     }
-    useEffect(()=> { 
-        fetchSurah() ; 
-        
-    },[number]) ; 
+    useEffect(() => {
+        fetchSurah();
+    }, [number]) ; 
     return ( 
         <div>  
                           
@@ -52,4 +51,4 @@ function Surah () {
         </div>
      );
 } 
-export default Surah; 
+export default Surah;
