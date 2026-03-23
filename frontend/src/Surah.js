@@ -11,7 +11,9 @@ function Surah () {
     }
 
   }
-    const fetchSurah = async ()=> { 
+    
+    useEffect(() => {
+        const fetchSurah = async ()=> { 
         
        const response = await fetch(`http://api.alquran.cloud/v1/surah/${number}`)
        const data = await response.json() ; 
@@ -23,7 +25,6 @@ function Surah () {
       console.log(dat.data.ayahs) ;
         
     }
-    useEffect(() => {
         fetchSurah();
     }, [number]) ; 
     return ( 
